@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahdiyyah</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cormorant Garamond', serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #14110f;
+      color: #f5ead7;
+      overflow-x: hidden;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 20px;
+      position: relative;
+    }
+
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center,
+          rgba(255, 220, 180, 0.08),
+          transparent 60%);
+    }
+
+    .intro-line {
+      font-size: clamp(1.5rem, 3vw, 3rem);
+      opacity: 0.8;
+      margin-bottom: 20px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .intro-line.secondary {
+      opacity: 0.55;
+      margin-bottom: 60px;
+    }
+
+    .book {
+      width: 100%;
+      max-width: 900px;
+      background: linear-gradient(to bottom right, #f6eddc, #eadcc3);
+      color: #2f241f;
+      padding: 60px;
+      border-radius: 32px;
+      border: 1px solid rgba(200,184,157,0.3);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+      transition: transform 0.8s ease;
+    }
+
+    .book:hover {
+      transform: rotateY(-2deg) scale(1.01);
+    }
+
+    .book-subtitle {
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin-bottom: 30px;
+    }
+
+    .book-title {
+      font-size: clamp(4rem, 10vw, 8rem);
+      margin-bottom: 30px;
+      text-shadow: 0 0 18px rgba(255,223,160,0.45);
+    }
+
+    .divider {
+      width: 120px;
+      height: 1px;
+      background: #8a6c45;
+      margin: 0 auto 30px;
+    }
+
+    .book-description {
+      font-style: italic;
+      font-size: 1.3rem;
+      opacity: 0.8;
+    }
+
+    .scroll-text {
+      position: absolute;
+      bottom: 30px;
+      opacity: 0.4;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      animation: pulse 2s infinite;
+    }
+
+    .chapter-card {
+      width: 100%;
+      max-width: 1200px;
+      background: linear-gradient(to bottom right, #f6eddc, #eadcc3);
+      color: #2f241f;
+      border-radius: 32px;
+      padding: 60px;
+      border: 1px solid rgba(200,184,157,0.3);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-glow {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(214,185,139,0.1);
+      filter: blur(80px);
+      border-radius: 50%;
+    }
+
+    .chapter-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .chapter-label {
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.8rem;
+      opacity: 0.5;
+      margin-bottom: 20px;
+    }
+
+    .chapter-quote {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 1.1;
+    }
+
+    .chapter-text {
+      font-size: clamp(1.2rem, 2vw, 2rem);
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    .tags {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tag {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(138,108,69,0.3);
+      transition: 0.4s;
+    }
+
+    .tag:hover {
+      background: #8a6c45;
+      color: white;
+    }
+
+    .quote-boxes {
+      display: grid;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .quote-box {
+      padding: 24px;
+      border-radius: 20px;
+      border: 1px solid rgba(138,108,69,0.3);
+      background: rgba(255,249,239,0.4);
+      transition: 0.4s;
+    }
+
+    .quote-box:hover {
+      transform: translateX(10px);
+    }
+
+    .message-bubbles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .bubble {
+      background: #f8f1e4;
+      border: 1px solid #d8c3a2;
+      border-radius: 999px;
+      padding: 14px 22px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .final-section {
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .final-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center,
+          rgba(255,220,180,0.12),
+          transparent 65%);
+    }
+
+    .final-small {
+      font-size: clamp(1.3rem, 3vw, 2.5rem);
+      font-style: italic;
+      opacity: 0.7;
+      margin-bottom: 40px;
+    }
+
+    .final-big {
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 1.1;
+      margin-bottom: 40px;
+      text-shadow: 0 0 18px rgba(255,223,160,0.45);
+    }
+
+    .signature {
+      font-size: clamp(2rem, 4vw, 3rem);
+      opacity: 0.6;
+      font-style: italic;
+    }
+
+    .ending {
+      position: absolute;
+      bottom: 60px;
+      opacity: 0.4;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    @media(max-width: 900px) {
+      .chapter-content {
+        grid-template-columns: 1fr;
+      }
+
+      .book,
+      .chapter-card {
+        padding: 40px 30px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+
+      100% {
+        opacity: 0.3;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <p class="intro-line">“My subconscious told me something.”</p>
+
+    <p class="intro-line secondary">“Who was in my dream.”</p>
+
+    <div class="book">
+      <p class="book-subtitle">A Story I Didn’t Expect To Write</p>
+
+      <h1 class="book-title">Mahdiyyah</h1>
+
+      <div class="divider"></div>
+
+      <p class="book-description">
+        written from somewhere between fear and honesty
+      </p>
+    </div>
+
+    <p class="scroll-text">scroll to open the book</p>
+  </section>
+
+  <section>
+    <div class="chapter-card">
+      <div class="chapter-glow"></div>
+
+      <div class="chapter-content">
+        <div>
+          <p class="chapter-label">Chapter I — The Beginning</p>
+
+          <h2 class="chapter-quote">
+            I think something in me noticed you before I did.
+          </h2>
+        </div>
+
+        <div>
+          <p class="chapter-text">
+            We met only last Saturday, yet somehow my mind keeps returning to you.
+            It confuses me a little… how someone I barely know could already feel
+            important.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="chapter-card">
+      <div class="chapter-glow"></div>
+
+      <div class="chapter-content">
+        <div>
+          <p class="chapter-label">Chapter II — The Quiet Things</p>
+
+          <h2 class="chapter-quote">
+            You never needed to be loud for me to notice you.
+          </h2>
+        </div>
+
+        <div>
+          <p class="chapter-text">
+            You express yourself in the smallest ways. Quietly. Softly.
+            The kind of things most people miss. But I noticed them.
+          </p>
+
+          <div class="tags">
+            <div class="tag">gentle</div>
+            <div class="tag">thoughtful</div>
+            <div class="tag">calming</div>
+            <div class="tag">safe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="chapter-card">
+      <div class="chapter-glow"></div>
+
+      <div class="chapter-content">
+        <div>
+          <p class="chapter-label">Chapter III — Her Escape</p>
+
+          <h2 class="chapter-quote">
+            Maybe this website is just me trying to meet you in your world.
+          </h2>
+        </div>
+
+        <div>
+          <p class="chapter-text">
+            You love books because they let you disappear from everything else
+            for a while. And honestly… I think that’s beautiful.
+          </p>
+
+          <div class="quote-boxes">
+            <div class="quote-box">
+              “Maybe that’s why I wanted to write this like a book.”
+            </div>
+
+            <div class="quote-box">
+              “Because stories seem to matter to you.”
+            </div>
+
+            <div class="quote-box">
+              “And somehow… you became one of mine.”
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="chapter-card">
+      <div class="chapter-glow"></div>
+
+      <div class="chapter-content">
+        <div>
+          <p class="chapter-label">Chapter IV — Fear</p>
+
+          <h2 class="chapter-quote">
+            What scares me isn’t liking you. It’s how much I already do.
+          </h2>
+        </div>
+
+        <div>
+          <p class="chapter-text">
+            I overthink a lot. I wonder what happens if the feelings aren’t
+            mutual. I wonder if I’m setting myself up to get hurt again.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="chapter-card">
+      <div class="chapter-glow"></div>
+
+      <div class="chapter-content">
+        <div>
+          <p class="chapter-label">Chapter V — The Comfort</p>
+
+          <h2 class="chapter-quote">
+            You became part of my days before I realised I was letting you in.
+          </h2>
+        </div>
+
+        <div>
+          <p class="chapter-text">
+            Every morning, every night, every random moment in the day…
+            I find myself wanting to message you.
+          </p>
+
+          <div class="message-bubbles">
+            <div class="bubble">good morning</div>
+            <div class="bubble">good night?</div>
+            <div class="bubble">im on the way home</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-section">
+    <p class="final-small">
+      “So maybe this is me finally putting the overthinking aside…”
+    </p>
+
+    <h2 class="final-big">
+      Mahdiyyah,<br>
+      I really do like you.
+    </h2>
+
+    <p class="signature">
+      — Twinkle Toes
+    </p>
+
+    <p class="ending">
+      Every story starts somewhere.
+    </p>
+  </section>
+
+</body>
+</html>
