@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Mahdiyyah</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -33,6 +35,87 @@
       padding: 80px 20px;
       position: relative;
     }
+
+    /* LOCK SCREEN */
+
+    #lockScreen {
+      position: fixed;
+      inset: 0;
+      background: #14110f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1.2s ease;
+    }
+
+    .lock-box {
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      background: linear-gradient(to bottom right, #f6eddc, #eadcc3);
+      color: #2f241f;
+      padding: 60px 40px;
+      border-radius: 32px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+    }
+
+    .lock-small {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .lock-title {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .lock-subtitle {
+      opacity: 0.6;
+      margin-bottom: 40px;
+    }
+
+    .lock-box input {
+      width: 100%;
+      padding: 18px;
+      margin-bottom: 18px;
+      border: none;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .lock-box button {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 16px;
+      background: #2f241f;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.4s;
+    }
+
+    .lock-box button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    #errorMessage {
+      margin-top: 20px;
+      color: #7a2e2e;
+      opacity: 0.8;
+    }
+
+    #mainSite {
+      display: none;
+    }
+
+    /* HERO */
 
     .hero {
       flex-direction: column;
@@ -114,6 +197,8 @@
       animation: pulse 2s infinite;
     }
 
+    /* CHAPTERS */
+
     .chapter-card {
       width: 100%;
       max-width: 1200px;
@@ -166,6 +251,8 @@
       opacity: 0.9;
     }
 
+    /* TAGS */
+
     .tags {
       margin-top: 30px;
       display: flex;
@@ -185,6 +272,8 @@
       color: white;
     }
 
+    /* QUOTES */
+
     .quote-boxes {
       display: grid;
       gap: 16px;
@@ -203,6 +292,8 @@
       transform: translateX(10px);
     }
 
+    /* BUBBLES */
+
     .message-bubbles {
       display: flex;
       flex-wrap: wrap;
@@ -217,6 +308,8 @@
       padding: 14px 22px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
+
+    /* FINAL */
 
     .final-section {
       text-align: center;
@@ -260,7 +353,10 @@
       text-transform: uppercase;
     }
 
+    /* MOBILE */
+
     @media(max-width: 900px) {
+
       .chapter-content {
         grid-template-columns: 1fr;
       }
@@ -269,7 +365,10 @@
       .chapter-card {
         padding: 40px 30px;
       }
+
     }
+
+    /* ANIMATIONS */
 
     @keyframes fadeIn {
       from {
@@ -310,192 +409,393 @@
         opacity: 0.3;
       }
     }
+
   </style>
 </head>
 
 <body>
 
-  <section class="hero">
-    <p class="intro-line">“My subconscious told me something.”</p>
+  <!-- LOCK SCREEN -->
 
-    <p class="intro-line secondary">“Who was in my dream.”</p>
+  <div id="lockScreen">
 
-    <div class="book">
-      <p class="book-subtitle">A Story I Didn’t Expect To Write</p>
+    <div class="lock-box">
 
-      <h1 class="book-title">Mahdiyyah</h1>
-
-      <div class="divider"></div>
-
-      <p class="book-description">
-        written from somewhere between fear and honesty
+      <p class="lock-small">
+        Some stories are meant to stay closed
+        until the right person arrives.
       </p>
+
+      <h1 class="lock-title">
+        Mahdiyyah
+      </h1>
+
+      <p class="lock-subtitle">
+        Enter the key correctly.
+      </p>
+
+      <input
+        type="text"
+        id="dateInput"
+        placeholder="DD/MM/YYYY"
+      />
+
+      <input
+        type="password"
+        id="passwordInput"
+        placeholder="password"
+      />
+
+      <button onclick="unlockBook()">
+        Open The Book
+      </button>
+
+      <p id="errorMessage"></p>
+
     </div>
 
-    <p class="scroll-text">scroll to open the book</p>
-  </section>
+  </div>
 
-  <section>
-    <div class="chapter-card">
-      <div class="chapter-glow"></div>
+  <!-- MAIN SITE -->
 
-      <div class="chapter-content">
-        <div>
-          <p class="chapter-label">Chapter I — The Beginning</p>
+  <div id="mainSite">
 
-          <h2 class="chapter-quote">
-            I think something in me noticed you before I did.
-          </h2>
-        </div>
+    <!-- HERO -->
 
-        <div>
-          <p class="chapter-text">
-            We met only last Saturday, yet somehow my mind keeps returning to you.
-            It confuses me a little… how someone I barely know could already feel
-            important.
-          </p>
-        </div>
+    <section class="hero">
+
+      <p class="intro-line">
+        “My subconscious told me something.”
+      </p>
+
+      <p class="intro-line secondary">
+        “Who was in my dream.”
+      </p>
+
+      <div class="book">
+
+        <p class="book-subtitle">
+          A Story I Didn’t Expect To Write
+        </p>
+
+        <h1 class="book-title">
+          Mahdiyyah
+        </h1>
+
+        <div class="divider"></div>
+
+        <p class="book-description">
+          written from somewhere between fear and honesty
+        </p>
+
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="chapter-card">
-      <div class="chapter-glow"></div>
+      <p class="scroll-text">
+        scroll to open the book
+      </p>
 
-      <div class="chapter-content">
-        <div>
-          <p class="chapter-label">Chapter II — The Quiet Things</p>
+    </section>
 
-          <h2 class="chapter-quote">
-            You never needed to be loud for me to notice you.
-          </h2>
-        </div>
+    <!-- CHAPTER 1 -->
 
-        <div>
-          <p class="chapter-text">
-            You express yourself in the smallest ways. Quietly. Softly.
-            The kind of things most people miss. But I noticed them.
-          </p>
+    <section>
 
-          <div class="tags">
-            <div class="tag">gentle</div>
-            <div class="tag">thoughtful</div>
-            <div class="tag">calming</div>
-            <div class="tag">safe</div>
+      <div class="chapter-card">
+
+        <div class="chapter-glow"></div>
+
+        <div class="chapter-content">
+
+          <div>
+
+            <p class="chapter-label">
+              Chapter I — The Beginning
+            </p>
+
+            <h2 class="chapter-quote">
+              I think something in me noticed you before I did.
+            </h2>
+
           </div>
+
+          <div>
+
+            <p class="chapter-text">
+              We met only last Saturday, yet somehow my mind keeps returning to you.
+              It confuses me a little… how someone I barely know could already feel
+              important.
+            </p>
+
+          </div>
+
         </div>
+
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="chapter-card">
-      <div class="chapter-glow"></div>
+    </section>
 
-      <div class="chapter-content">
-        <div>
-          <p class="chapter-label">Chapter III — Her Escape</p>
+    <!-- CHAPTER 2 -->
 
-          <h2 class="chapter-quote">
-            Maybe this website is just me trying to meet you in your world.
-          </h2>
-        </div>
+    <section>
 
-        <div>
-          <p class="chapter-text">
-            You love books because they let you disappear from everything else
-            for a while. And honestly… I think that’s beautiful.
-          </p>
+      <div class="chapter-card">
 
-          <div class="quote-boxes">
-            <div class="quote-box">
-              “Maybe that’s why I wanted to write this like a book.”
+        <div class="chapter-glow"></div>
+
+        <div class="chapter-content">
+
+          <div>
+
+            <p class="chapter-label">
+              Chapter II — The Quiet Things
+            </p>
+
+            <h2 class="chapter-quote">
+              You never needed to be loud for me to notice you.
+            </h2>
+
+          </div>
+
+          <div>
+
+            <p class="chapter-text">
+              You express yourself in the smallest ways.
+              Quietly. Softly.
+              The kind of things most people miss.
+              But I noticed them.
+            </p>
+
+            <div class="tags">
+
+              <div class="tag">gentle</div>
+              <div class="tag">thoughtful</div>
+              <div class="tag">calming</div>
+              <div class="tag">safe</div>
+
             </div>
 
-            <div class="quote-box">
-              “Because stories seem to matter to you.”
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CHAPTER 3 -->
+
+    <section>
+
+      <div class="chapter-card">
+
+        <div class="chapter-glow"></div>
+
+        <div class="chapter-content">
+
+          <div>
+
+            <p class="chapter-label">
+              Chapter III — Her Escape
+            </p>
+
+            <h2 class="chapter-quote">
+              Maybe this website is just me trying to meet you in your world.
+            </h2>
+
+          </div>
+
+          <div>
+
+            <p class="chapter-text">
+              You love books because they let you disappear
+              from everything else for a while.
+              And honestly… I think that’s beautiful.
+            </p>
+
+            <div class="quote-boxes">
+
+              <div class="quote-box">
+                “Maybe that’s why I wanted to write this like a book.”
+              </div>
+
+              <div class="quote-box">
+                “Because stories seem to matter to you.”
+              </div>
+
+              <div class="quote-box">
+                “And somehow… you became one of mine.”
+              </div>
+
             </div>
 
-            <div class="quote-box">
-              “And somehow… you became one of mine.”
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CHAPTER 4 -->
+
+    <section>
+
+      <div class="chapter-card">
+
+        <div class="chapter-glow"></div>
+
+        <div class="chapter-content">
+
+          <div>
+
+            <p class="chapter-label">
+              Chapter IV — Fear
+            </p>
+
+            <h2 class="chapter-quote">
+              What scares me isn’t liking you.
+              It’s how much I already do.
+            </h2>
+
+          </div>
+
+          <div>
+
+            <p class="chapter-text">
+              I overthink a lot.
+              I wonder what happens if the feelings aren’t mutual.
+              I wonder if I’m setting myself up to get hurt again.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CHAPTER 5 -->
+
+    <section>
+
+      <div class="chapter-card">
+
+        <div class="chapter-glow"></div>
+
+        <div class="chapter-content">
+
+          <div>
+
+            <p class="chapter-label">
+              Chapter V — The Comfort
+            </p>
+
+            <h2 class="chapter-quote">
+              You became part of my days before I realised I was letting you in.
+            </h2>
+
+          </div>
+
+          <div>
+
+            <p class="chapter-text">
+              Every morning, every night,
+              every random moment in the day…
+              I find myself wanting to message you.
+            </p>
+
+            <div class="message-bubbles">
+
+              <div class="bubble">good morning</div>
+              <div class="bubble">good night?</div>
+              <div class="bubble">im on the way home</div>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="chapter-card">
-      <div class="chapter-glow"></div>
+    </section>
 
-      <div class="chapter-content">
-        <div>
-          <p class="chapter-label">Chapter IV — Fear</p>
+    <!-- FINAL -->
 
-          <h2 class="chapter-quote">
-            What scares me isn’t liking you. It’s how much I already do.
-          </h2>
-        </div>
+    <section class="final-section">
 
-        <div>
-          <p class="chapter-text">
-            I overthink a lot. I wonder what happens if the feelings aren’t
-            mutual. I wonder if I’m setting myself up to get hurt again.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <p class="final-small">
+        “So maybe this is me finally putting the overthinking aside…”
+      </p>
 
-  <section>
-    <div class="chapter-card">
-      <div class="chapter-glow"></div>
+      <h2 class="final-big">
+        Mahdiyyah,<br>
+        I really do like you.
+      </h2>
 
-      <div class="chapter-content">
-        <div>
-          <p class="chapter-label">Chapter V — The Comfort</p>
+      <p class="signature">
+        — Twinkle Toes
+      </p>
 
-          <h2 class="chapter-quote">
-            You became part of my days before I realised I was letting you in.
-          </h2>
-        </div>
+      <p class="ending">
+        Every story starts somewhere.
+      </p>
 
-        <div>
-          <p class="chapter-text">
-            Every morning, every night, every random moment in the day…
-            I find myself wanting to message you.
-          </p>
+    </section>
 
-          <div class="message-bubbles">
-            <div class="bubble">good morning</div>
-            <div class="bubble">good night?</div>
-            <div class="bubble">im on the way home</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <section class="final-section">
-    <p class="final-small">
-      “So maybe this is me finally putting the overthinking aside…”
-    </p>
+  <!-- SCRIPT -->
 
-    <h2 class="final-big">
-      Mahdiyyah,<br>
-      I really do like you.
-    </h2>
+  <script>
 
-    <p class="signature">
-      — Twinkle Toes
-    </p>
+    function unlockBook() {
 
-    <p class="ending">
-      Every story starts somewhere.
-    </p>
-  </section>
+      const date = document
+        .getElementById("dateInput")
+        .value
+        .trim();
+
+      const password = document
+        .getElementById("passwordInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+      const error = document
+        .getElementById("errorMessage");
+
+      if (
+        date === "16/05/2026" &&
+        password === "your cute"
+      ) {
+
+        document.getElementById("lockScreen")
+          .style.opacity = "0";
+
+        setTimeout(() => {
+
+          document.getElementById("lockScreen")
+            .style.display = "none";
+
+          document.getElementById("mainSite")
+            .style.display = "block";
+
+          window.scrollTo(0, 0);
+
+        }, 1200);
+
+      } else {
+
+        error.innerText =
+          "The book stays closed.";
+
+      }
+
+    }
+
+  </script>
 
 </body>
 </html>
